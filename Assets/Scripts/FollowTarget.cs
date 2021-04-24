@@ -8,15 +8,11 @@ public class FollowTarget : MonoBehaviour
     public Vector3 offset = new Vector3(0, 0, -10);
     public float moveSpeed = 5;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private Vector3 velo = Vector3.zero;
 
     // Update is called once per frame
     void LateUpdate()
     {
-        transform.position =Vector3.MoveTowards(transform.position, target.position + offset, Time.deltaTime * moveSpeed);
+        transform.position = Vector3.SmoothDamp(transform.position, target.position + offset, ref velo, moveSpeed);
     }
 }
