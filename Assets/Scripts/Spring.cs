@@ -12,7 +12,12 @@ public class Spring : MonoBehaviour
     private SpriteRenderer spr;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
+    {
+        spr = GetComponent<SpriteRenderer>();
+    }
+
+    private void Start()
     {
         spr = GetComponent<SpriteRenderer>();
     }

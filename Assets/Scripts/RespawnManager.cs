@@ -20,8 +20,8 @@ public class RespawnManager : MonoBehaviour
 
     public void Respawn()
     {
-        rsLvl.ResetLVL();
         player.transform.position = spawnPosition;
+        rsLvl.ResetLVL(); 
     }
 
     public void SetSpawnPoint(Vector3 spawnPos)

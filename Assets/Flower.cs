@@ -13,7 +13,7 @@ public class Flower : MonoBehaviour
 
     private void Start()
     {
-        PostProcessVolume volume = gameObject.GetComponent<PostProcessVolume>();
+        PostProcessVolume volume = ppVol.GetComponent<PostProcessVolume>();
         volume.profile.TryGetSettings(out cg);
     }
 
