@@ -65,9 +65,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        rig.AddForce(new Vector2(h * moveSpeed, 0), ForceMode2D.Force);
-
-        rig.velocity = new Vector2(Mathf.Clamp(rig.velocity.x, -maxVelo, maxVelo), rig.velocity.y);
+        // rig.AddForce(new Vector2(h * moveSpeed, 0), ForceMode2D.Force);
+        rig.velocity = new Vector2(h * moveSpeed, rig.velocity.y);
+        //rig.velocity = new Vector2(Mathf.Clamp(rig.velocity.x, -maxVelo, maxVelo), rig.velocity.y);
     }
 
     bool onGround()
