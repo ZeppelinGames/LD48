@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 
     public Rect groundTrigger;
 
+    private bool canJump = true;
     private bool isGrounded = false;
 
     private Rigidbody2D rig;
@@ -24,14 +25,15 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        isGrounded = onGround();
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (canJump)
         {
-            rig.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            isGrounded = false;
+            isGrounded = onGround();
+            if (Input.GetButtonDown("Jump") && isGrounded)
+            {
+                rig.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                isGrounded = false;
+            }
         }
-
-        //        float h = Input.GetAxis("Horizontal");
 
         float h = 0;
         if (Input.GetKey(KeyCode.A)) { h = -1; }
@@ -62,5 +64,10 @@ public class PlayerController : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube((Vector2)transform.position + groundTrigger.position, groundTrigger.size);
         }
+    }
+
+    public void setJump(bool jump)
+    {
+        canJump = jump;
     }
 }
