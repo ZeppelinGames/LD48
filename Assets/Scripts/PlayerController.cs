@@ -14,6 +14,13 @@ public class PlayerController : MonoBehaviour
     private bool canJump = true;
     private bool isGrounded = false;
 
+    public float stepDelay = 0.3f;
+    private float prevStep = 0;
+
+    public AudioClip step;
+    public AudioClip jump;
+
+    private AudioSource audioSource;
     private Rigidbody2D rig;
     public Animator anim;
 
@@ -21,6 +28,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -30,6 +38,9 @@ public class PlayerController : MonoBehaviour
             isGrounded = onGround();
             if (Input.GetButtonDown("Jump") && isGrounded)
             {
+                audioSource.clip = jump;
+                audioSource.Play();
+
                 rig.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                 isGrounded = false;
             }
@@ -42,6 +53,18 @@ public class PlayerController : MonoBehaviour
         transform.localScale = new Vector3(h != 0 ? h : 1, 1, 1);
 
         anim.SetBool("moving", h > 0 || h < 0 ? true : false);
+        if(h > 0 || h < 0) {
+            if (onGround())
+            {
+                if (Time.time - prevStep > stepDelay)
+                {
+                    audioSource.clip = step;
+                    audioSource.Play();
+                    prevStep = Time.time;
+                }
+            }
+        }
+
         rig.AddForce(new Vector2(h * moveSpeed, 0), ForceMode2D.Force);
 
         rig.velocity = new Vector2(Mathf.Clamp(rig.velocity.x, -maxVelo, maxVelo), rig.velocity.y);

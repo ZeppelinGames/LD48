@@ -10,11 +10,13 @@ public class Spring : MonoBehaviour
     public Sprite extendedSpring;
 
     private SpriteRenderer spr;
+    private AudioSource aud;
 
     // Start is called before the first frame update
     void OnEnable()
     {
         spr = GetComponent<SpriteRenderer>();
+        aud = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -22,21 +24,23 @@ public class Spring : MonoBehaviour
         spr = GetComponent<SpriteRenderer>();
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Rigidbody2D>())
+        {
+            aud.Play();
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.GetComponent<Rigidbody2D>())
         {
-            Vector2 fwd = transform.up;
-            if (Vector2.Dot(collision.transform.position, fwd) < -0.5f)
-            {
-                Rigidbody2D rig = collision.GetComponent<Rigidbody2D>();
+            Rigidbody2D rig = collision.GetComponent<Rigidbody2D>();
 
-                
+            rig.velocity += (Vector2)transform.up * springForce;
 
-                rig.velocity += fwd * springForce;
-
-                spr.sprite = extendedSpring;
-            }
+            spr.sprite = extendedSpring;
         }
     }
 
