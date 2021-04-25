@@ -28,4 +28,9 @@ public class Inventory : MonoBehaviour
     {
         return inventoryItems.Contains(id);
     }
+
+    public void ClearInventory()
+    {
+        inventoryItems.Clear();
+    }
 }

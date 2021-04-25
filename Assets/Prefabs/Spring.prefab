@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd1902f20be8214cadbcebc809b5ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  springForce: 10
+  springForce: 2
   coiledSpring: {fileID: -6535339056072157310, guid: 3cae0861482b317438229a091fc167b2,
     type: 3}
   extendedSpring: {fileID: -829285371938577886, guid: 3cae0861482b317438229a091fc167b2,

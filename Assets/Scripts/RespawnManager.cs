@@ -5,6 +5,7 @@ using UnityEngine;
 public class RespawnManager : MonoBehaviour
 {
     public Transform player;
+    public ResetLevel rsLvl;
     public static RespawnManager instance;
 
     private Vector3 spawnPosition;
@@ -18,7 +19,8 @@ public class RespawnManager : MonoBehaviour
     }
 
     public void Respawn()
-    { 
+    {
+        rsLvl.ResetLVL();
         player.transform.position = spawnPosition;
     }
 

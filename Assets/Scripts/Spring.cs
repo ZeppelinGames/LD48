@@ -21,10 +21,14 @@ public class Spring : MonoBehaviour
     {
         if (collision.GetComponent<Rigidbody2D>())
         {
-            if (collision.transform.position.y > transform.position.y)
+            Vector2 fwd = transform.up;
+            if (Vector2.Dot(collision.transform.position, fwd) < -0.5f)
             {
                 Rigidbody2D rig = collision.GetComponent<Rigidbody2D>();
-                rig.velocity = new Vector2(rig.velocity.x, springForce);
+
+                
+
+                rig.velocity += fwd * springForce;
 
                 spr.sprite = extendedSpring;
             }
